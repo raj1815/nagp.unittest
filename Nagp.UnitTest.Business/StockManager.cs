@@ -49,7 +49,7 @@ namespace Nagp.UnitTest.Business
 
                 user.AvailableAmount = user.AvailableAmount - (stock.Price * stockRequest.Quantity);
 
-                var stockExist = user.HoldingShares?.FirstOrDefault(s => s.Id == stockRequest.StockId);
+                var stockExist = user.HoldingShares?.FirstOrDefault(s => s.ShareId == stockRequest.StockId);
                 if (stockExist != null)
                 {
                     stockExist.Quantity += stockRequest.Quantity;
@@ -60,14 +60,19 @@ namespace Nagp.UnitTest.Business
                 {
                     HoldingShare newStock = new HoldingShare()
                     {
-                        Id = stock.Id,
+                        ShareId = stock.Id,
                         Price = stock.Price,
                         Quantity = stockRequest.Quantity,
                         UserId = stockRequest.UserID
                     };
 
                     this._holdingShare.Insert(newStock);
-                    user.HoldingShares = new List<HoldingShare>() { newStock };
+
+                    if(user.HoldingShares == null)
+                    {
+                        user.HoldingShares = new List<HoldingShare>();
+                    }
+                    user.HoldingShares.Add(newStock);
                 }
                 this._users.Update(user);
                 this._users.Save();
@@ -94,7 +99,7 @@ namespace Nagp.UnitTest.Business
                     throw new BusinessException("Stock doesnot exist");
                 }
 
-                var stockExist = response.HoldingShares.FirstOrDefault(s => s.Id == stockRequest.StockId);
+                var stockExist = response.HoldingShares.FirstOrDefault(s => s.ShareId == stockRequest.StockId);
 
                 if (stockExist == null)
                 {
@@ -106,7 +111,7 @@ namespace Nagp.UnitTest.Business
                     throw new BusinessException("Stock Quantity is more");
                 }
 
-                var brokerageCharge = (double)0.05 * (stock.Price * stockRequest.Quantity);
+                var brokerageCharge = (double)0.0005 * (stock.Price * stockRequest.Quantity);
 
                 if (brokerageCharge < 20)
                 {

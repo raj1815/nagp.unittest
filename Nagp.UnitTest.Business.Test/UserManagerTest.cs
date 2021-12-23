@@ -2,6 +2,7 @@
 using Nagp.UnitTest.Business.Exceptions;
 using Nagp.UnitTest.Business.Interface;
 using Nagp.UnitTest.Business.Model;
+using Nagp.UnitTest.EntityFrameworkCore.Model;
 using Nagp.UnitTest.EntityFrameworkCore.Repository;
 using System;
 using System.Collections;
@@ -146,6 +147,63 @@ namespace Nagp.UnitTest.Business.Test
             var response = manager.AddFunds(request);
 
             Assert.Equal(200, response.AvailableAmount);
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_addFunds_fail_when_user_update_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new EntityFrameworkCore.Model.User() { Id = 10, AvailableAmount = 100 });
+
+            setup.User.Setup((c) => c.Update(It.IsAny<User>()))
+                .Throws(new Exception());
+
+            var manager =
+                setup.GetUserManager();
+
+            FundRequest request = new FundRequest();
+            request.UserID = 10;
+            request.Amount = 100;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.AddFunds(request);
+                 });
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_addFunds_fail_when_user_save_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new EntityFrameworkCore.Model.User() { Id = 10, AvailableAmount = 100 });
+
+            setup.User.Setup((c) => c.Save())
+                .Throws(new Exception());
+
+            var manager =
+                setup.GetUserManager();
+
+            FundRequest request = new FundRequest();
+            request.UserID = 10;
+            request.Amount = 100;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.AddFunds(request);
+                 });
+            Mock.VerifyAll();
             Mock.VerifyAll();
         }
     }

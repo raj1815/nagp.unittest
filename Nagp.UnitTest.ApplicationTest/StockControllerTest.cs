@@ -3,6 +3,7 @@ using Moq;
 using Nagp.UnitTest.Application.Common;
 using Nagp.UnitTest.Application.Controllers;
 using Nagp.UnitTest.Application.Model;
+using Nagp.UnitTest.Business.Exceptions;
 using Nagp.UnitTest.Business.Interface;
 using Nagp.UnitTest.Business.Model;
 using Nagp.UnitTest.EntityFrameworkCore.Model;
@@ -49,7 +50,7 @@ namespace Nagp.UnitTest.ApplicationTest
         }
 
         [Fact]
-        public async void Buy_Success()
+        public void Buy_Success()
         {
             var setup = _fixture.GetNewInstance();
             var request = new StockRequestDto()
@@ -71,31 +72,8 @@ namespace Nagp.UnitTest.ApplicationTest
             Assert.Equal(Constants.Successful, response.Status);
         }
 
-        //[Fact]
-        //public async void Buy_ModelStateInvalid()
-        //{
-        //    var setup = _fixture.GetNewInstance();
-        //    var request = new StockRequestDto()
-        //    {
-        //        StockId = 1,
-        //        UserID = 45
-        //    };
-        //    setup.ObjectMapper
-        //        .Setup(x =>
-        //        x.Map<StockRequestDto, StockRequest>(request))
-        //        .Returns(new StockRequest());
-
-        //    setup.StockManager.Setup(x => x.Buy(It.IsAny<StockRequest>())).Returns(new User() { });
-        //    //setup.GetController().va
-        //    var stockController = setup.GetController();
-        
-        //    //// act
-        //    var response = stockController.TryValidateModel(request);
-        //    Assert.False(response);
-        //}
-
         [Fact]
-        public async void Buy_Returns_NULL()
+        public void Buy_Returns_NULL()
         {
             var setup = _fixture.GetNewInstance();
             var request = new StockRequestDto()
@@ -117,7 +95,30 @@ namespace Nagp.UnitTest.ApplicationTest
         }
 
         [Fact]
-        public async void Buy_Throw_Exceptiosn()
+        public void Buy_Throw_BusinessException()
+        {
+            var setup = _fixture.GetNewInstance();
+            var request = new StockRequestDto()
+            {
+                StockId = 1,
+                UserID = 45
+            };
+            setup.ObjectMapper
+                .Setup(x =>
+                x.Map<StockRequestDto, StockRequest>(request))
+                .Returns(new StockRequest());
+
+            setup.StockManager.Setup(x => x.Buy(It.IsAny<StockRequest>())).Throws(new BusinessException("Test"));
+
+            var StockController = setup.GetController();
+            //// act
+            var response = StockController.Buy(request);
+            Assert.Equal(Constants.UnSuccessful, response.Status);
+            Assert.Equal("Error Test", response.ErrorMessage);
+        }
+
+        [Fact]
+        public void Buy_Throw_Exception()
         {
             var setup = _fixture.GetNewInstance();
             var request = new StockRequestDto()
@@ -139,7 +140,7 @@ namespace Nagp.UnitTest.ApplicationTest
         }
 
         [Fact]
-        public async void Sell_Success()
+        public void Sell_Success()
         {
             var setup = _fixture.GetNewInstance();
             var request = new StockRequestDto()
@@ -161,31 +162,8 @@ namespace Nagp.UnitTest.ApplicationTest
             Assert.Equal(Constants.Successful, response.Status);
         }
 
-        //[Fact]
-        //public async void Sell_ModelStateInvalid()
-        //{
-        //    var setup = _fixture.GetNewInstance();
-        //    var request = new StockRequestDto()
-        //    {
-        //        StockId = 1,
-        //        UserID = 45
-        //    };
-        //    setup.ObjectMapper
-        //        .Setup(x =>
-        //        x.Map<StockRequestDto, StockRequest>(request))
-        //        .Returns(new StockRequest());
-
-        //    setup.StockManager.Setup(x => x.Buy(It.IsAny<StockRequest>())).Returns(new User() { });
-        //    //setup.GetController().va
-        //    var stockController = setup.GetController();
-
-        //    //// act
-        //    var response = stockController.TryValidateModel(request);
-        //    Assert.False(response);
-        //}
-
         [Fact]
-        public async void Sell_Returns_NULL()
+        public void Sell_Returns_NULL()
         {
             var setup = _fixture.GetNewInstance();
             var request = new StockRequestDto()
@@ -207,7 +185,30 @@ namespace Nagp.UnitTest.ApplicationTest
         }
 
         [Fact]
-        public async void Sell_Throw_Exceptiosn()
+        public void Sell_Throw_BusinessException()
+        {
+            var setup = _fixture.GetNewInstance();
+            var request = new StockRequestDto()
+            {
+                StockId = 1,
+                UserID = 45
+            };
+            setup.ObjectMapper
+                .Setup(x =>
+                x.Map<StockRequestDto, StockRequest>(request))
+                .Returns(new StockRequest());
+
+            setup.StockManager.Setup(x => x.Sell(It.IsAny<StockRequest>())).Throws(new BusinessException("Test"));
+
+            var StockController = setup.GetController();
+            //// act
+            var response = StockController.Sell(request);
+            Assert.Equal(Constants.UnSuccessful, response.Status);
+            Assert.Equal("Error Test", response.ErrorMessage);
+        }
+
+        [Fact]
+        public void Sell_Throw_Exception()
         {
             var setup = _fixture.GetNewInstance();
             var request = new StockRequestDto()

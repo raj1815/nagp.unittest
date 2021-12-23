@@ -187,7 +187,7 @@ namespace Nagp.UnitTest.Business.Test
             .Returns(new User()
             {
                 Id = 5,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { Id = 10, Price = 20, Quantity = 5 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 5 } }
             });
 
             setup.Wrapper.Setup((c) => c.isTradingTime())
@@ -224,7 +224,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 5,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { Id = 10, Price = 2, Quantity = 5 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 2, Quantity = 5 } }
             });
 
             setup.Wrapper.Setup((c) => c.isTradingTime())
@@ -264,7 +264,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 10,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { Id = 10, Price = 20, Quantity = 20 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 20 } }
             }); 
 
             var manager =
@@ -277,7 +277,7 @@ namespace Nagp.UnitTest.Business.Test
             //Act
 
             var response = manager.Sell(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.Id == stockRequest.StockId).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
 
             Assert.Equal(40, response.AvailableAmount);
             Assert.Equal(15, holdShare.Quantity);
@@ -301,7 +301,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 10000,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { Id = 10, Price = 20, Quantity = 2000 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
             });
 
             var manager =
@@ -315,10 +315,130 @@ namespace Nagp.UnitTest.Business.Test
             //Act
 
             var response = manager.Sell(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.Id == stockRequest.StockId).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
 
-            Assert.Equal(19500, response.AvailableAmount);
+            Assert.Equal(19980, response.AvailableAmount);
             Assert.Equal(1000, holdShare.Quantity);
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_sell_fail_when_user_update_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock() { Id = 10, Price = 10 });
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new User()
+            {
+                Id = 5,
+                AvailableAmount = 10000,
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
+            });
+
+            setup.User.Setup((c) => c.Update(It.IsAny<User>()))
+            .Throws(new Exception());
+
+            var manager =
+                setup.GetStockManager();
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 5;
+            stockRequest.StockId = 10;
+            stockRequest.Quantity = 1000;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.Sell(stockRequest);
+                 });
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_sell_fail_when_stock_update_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock() { Id = 10, Price = 10 });
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new User()
+            {
+                Id = 5,
+                AvailableAmount = 10000,
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
+            });
+
+            setup.Stock.Setup((c) => c.Update(It.IsAny<Stock>()))
+            .Throws(new Exception());
+
+            var manager =
+                setup.GetStockManager();
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 5;
+            stockRequest.StockId = 10;
+            stockRequest.Quantity = 1000;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.Sell(stockRequest);
+                 });
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_sell_fail_when_user_save_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock() { Id = 10, Price = 10 });
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new User()
+            {
+                Id = 5,
+                AvailableAmount = 10000,
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
+            });
+
+            setup.User.Setup((c) => c.Save())
+            .Throws(new Exception());
+
+            var manager =
+                setup.GetStockManager();
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 5;
+            stockRequest.StockId = 10;
+            stockRequest.Quantity = 1000;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.Sell(stockRequest);
+                 });
             Mock.VerifyAll();
         }
 
@@ -438,11 +558,49 @@ namespace Nagp.UnitTest.Business.Test
 
             //Act
             var response = manager.Buy(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.Id == stockRequest.StockId).FirstOrDefault();
-            var holdShareNotPresent = response.HoldingShares.Where(h => h.Id == 100).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
+            var holdShareNotPresent = response.HoldingShares.Where(h => h.ShareId == 100).FirstOrDefault();
 
             Assert.NotNull(holdShare);
             Assert.Null(holdShareNotPresent);
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_buy_success_when_user_have_other_share()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+            var availableAmount = 1000;
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock() { Id = 2, Price = 10, Quantity = 1000 });
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new User()
+            {
+                Id = 2,
+                Firstname = "test",
+                AvailableAmount = availableAmount,
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 1, Quantity = 5, Price = 100 } }
+            });
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            var manager =
+                setup.GetStockManager();
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 2;
+            stockRequest.StockId = 2;
+            stockRequest.Quantity = 5;
+
+            //Act
+            var response = manager.Buy(stockRequest);
+            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
+        
+            Assert.NotNull(holdShare);
+            Assert.Equal(2, response.HoldingShares.Count);
             Mock.VerifyAll();
         }
 
@@ -461,7 +619,7 @@ namespace Nagp.UnitTest.Business.Test
 
             setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
             .Returns(new User() { Id = 2, Firstname = "test", AvailableAmount = availableAmount,
-            HoldingShares = new List<HoldingShare>() { new HoldingShare() { Id = 1, Quantity = 5, Price= 100} }
+            HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 1, Quantity = 5, Price= 100} }
             }); 
 
             var manager =
@@ -474,11 +632,148 @@ namespace Nagp.UnitTest.Business.Test
           
             //Act
             var response = manager.Buy(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.Id == stockRequest.StockId).FirstOrDefault();            var holdShareNotPresent = response.HoldingShares.Where(h => h.Id == 100).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();            var holdShareNotPresent = response.HoldingShares.Where(h => h.ShareId == 100).FirstOrDefault();
 
             Assert.NotNull(holdShare);
             Assert.Equal(10, holdShare.Quantity);
             Assert.Equal(availableAmount - (100 * stockRequest.Quantity), response.AvailableAmount);
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_buy_fail_when_holdingShare_insert_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock());
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new User());
+
+            setup.HoldingShare.Setup((c) => c.Insert(It.IsAny<HoldingShare>()))
+            .Throws(new Exception());
+
+            var manager =
+                setup.GetStockManager();
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 4;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.Buy(stockRequest);
+                 });
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_buy_fail_when_holdingShare_update_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock());
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+             .Returns(new User()
+             {
+                 Id = 5,
+                 HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 5 } }
+             });
+
+            setup.HoldingShare.Setup((c) => c.Update(It.IsAny<HoldingShare>()))
+            .Throws(new Exception());
+
+            var manager =
+                setup.GetStockManager();
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 4;
+            stockRequest.StockId = 10;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.Buy(stockRequest);
+                 });
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_buy_fail_when_user_update_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock());
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new User());
+
+            setup.User.Setup((c) => c.Update(It.IsAny<User>()))
+            .Throws(new Exception());
+
+            var manager =
+                setup.GetStockManager();
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 4;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.Buy(stockRequest);
+                 });
+            Mock.VerifyAll();
+        }
+
+        [Fact]
+        public void When_buy_fail_when_save_fail()
+        {
+            //Arrange
+            var setup = _fixture.GetNewInstance();
+
+            setup.Stock.Setup((c) => c.GetById(It.IsAny<int>()))
+                .Returns(new Stock());
+
+            setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
+            .Returns(new User());
+
+            setup.User.Setup((c) => c.Save())
+            .Throws(new Exception());
+
+            var manager =
+                setup.GetStockManager();
+
+            setup.Wrapper.Setup((c) => c.isTradingTime())
+            .Returns(true);
+
+            StockRequest stockRequest = new StockRequest();
+            stockRequest.UserID = 4;
+
+            //Act
+            var exception =
+                 Assert.Throws<Exception>(() =>
+                 {
+                     manager.Buy(stockRequest);
+                 });
             Mock.VerifyAll();
         }
     }

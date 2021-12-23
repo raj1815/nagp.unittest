@@ -30,6 +30,7 @@ namespace Nagp.UnitTest.Business
 
             user.AvailableAmount = user.AvailableAmount + request.Amount -  brokerageCharges(amount);
             this._users.Update(user);
+            this._users.Save();
             return user;
         }
 

@@ -3,6 +3,7 @@ using Moq;
 using Nagp.UnitTest.Application.Common;
 using Nagp.UnitTest.Application.Controllers;
 using Nagp.UnitTest.Application.Model;
+using Nagp.UnitTest.Business.Exceptions;
 using Nagp.UnitTest.Business.Interface;
 using Nagp.UnitTest.Business.Model;
 using Nagp.UnitTest.EntityFrameworkCore.Model;
@@ -117,7 +118,7 @@ namespace Nagp.UnitTest.ApplicationTest
         }
 
         [Fact]
-        public async void AddFunds_Throw_Exceptiosn()
+        public void AddFunds_Throw_Exception()
         {
             var setup = _fixture.GetNewInstance();
             var request = new FundRequestDto()
@@ -138,6 +139,28 @@ namespace Nagp.UnitTest.ApplicationTest
             Assert.Equal(Constants.UnSuccessful, response.Status);
         }
 
+        [Fact]
+        public void AddFunds_Throw_BusinessException()
+        {
+            var setup = _fixture.GetNewInstance();
+            var request = new FundRequestDto()
+            {
+                Amount = 100,
+                UserID = 45
+            };
+            setup.ObjectMapper
+                .Setup(x =>
+                x.Map<FundRequestDto, FundRequest>(request))
+                .Returns(new FundRequest());
+
+            setup.UserManager.Setup(x => x.AddFunds(It.IsAny<FundRequest>())).Throws(new BusinessException("Test") { });
+
+            var UserController = setup.GetController();
+            //// act
+            var response = UserController.AddFunds(request);
+            Assert.Equal(Constants.UnSuccessful, response.Status);
+            Assert.Equal("Error Test", response.ErrorMessage);
+        }
 
     }
 }

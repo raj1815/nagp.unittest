@@ -31,6 +31,12 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
                     Firstname = "test",
                     AvailableAmount = 10000,
                 });
+                context.User.Add(new User()
+                {
+                    Id = 3,
+                    Firstname = "random",
+                    AvailableAmount = 10000,
+                });
                 context.Stock.Add(new Stock()
                 {
                     Id = 1,
@@ -45,7 +51,7 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
                 });
                 context.HoldingShare.Add(new HoldingShare()
                 {
-                    Id = 2,
+                    ShareId = 2,
                     Price = 15,
                     Quantity = 1000,
                     UserId = 1
@@ -70,7 +76,19 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
         }
 
         [Fact]
-        public void Check_StockEnity_Fetched_Correctly()
+        public void Check_stockallenity_fetched_correctly()
+        {
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                GenericRepository<Stock> repo = new GenericRepository<Stock>(context);
+                var stock = repo.GetAll();
+                Assert.True(stock.ToList().Count > 1);
+            };
+
+        }
+
+        [Fact]
+        public void Check_stockenity_fetched_correctly()
         {
             using (var context = new eTraderDBContext(this.fixture.option))
             {
@@ -80,36 +98,9 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
             };
 
         }
-        [Fact]
-        public void Check_StockAllEnity_Fetched_Correctly()
-        {
-            using (var context = new eTraderDBContext(this.fixture.option))
-            {
-                GenericRepository<User> repo = new GenericRepository<User>(context);
-                var stock = repo.GetAll();
-                Assert.Equal(2, stock.ToList().Count);
-            };
 
-        }
         [Fact]
-        public void check_StockEnity_Is_Added_Correctly()
-        {
-            var stock = new Stock() { Id = 10, Price = 10, Quantity = 100 };
-            using (var context = new eTraderDBContext(this.fixture.option))
-            {
-                GenericRepository<Stock> repo = new GenericRepository<Stock>(context);
-                var oldStock = context.Stock.FirstOrDefault(s => s.Id == 10);
-
-                repo.Insert(stock);
-                repo.Save();
-                var newStock = context.Stock.FirstOrDefault(s => s.Id == 10);
-                Assert.Null(oldStock);
-                Assert.NotNull(newStock);
-            };
-
-        }
-        [Fact]
-        public void check_StockEnity_Is_Price_Updated_Correctly()
+        public void Check_StockEnity_is_price_updated_correctly()
         {
             using (var context = new eTraderDBContext(this.fixture.option))
             {
@@ -125,7 +116,7 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
 
         }
         [Fact]
-        public void check_StockEnity_Is_Quantity_Updated_Correctly()
+        public void Check_StockEnity_is_Quantity_updated_correctly()
         {
             using (var context = new eTraderDBContext(this.fixture.option))
             {
@@ -141,7 +132,7 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
 
         }
         [Fact]
-        public void check_userEnity_Fetched_Correctly()
+        public void Check_userEnity_fetched_correctly()
         {
             using (var context = new eTraderDBContext(this.fixture.option))
             {
@@ -151,6 +142,104 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
                 Assert.Equal("1", user.HoldingShares.Count.ToString());
             };
 
+        }
+        [Fact]
+        public void Check_userAllEnity_fetched_correctly()
+        {
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                UserRepository repo = new UserRepository(context);
+                var user = repo.GetAll();
+                Assert.True(user.ToList().Count > 2);
+            };
+
+        }
+        [Fact]
+        public void Check_userEnity_is_added_correctly()
+        {
+            var user = new User() { Id = 10, Firstname ="test4", AvailableAmount = 100 };
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                UserRepository repo = new UserRepository(context);
+                var oldUser = context.User.FirstOrDefault(s => s.Id == 10);
+
+                repo.Insert(user);
+                repo.Save();
+                var newUser = context.User.FirstOrDefault(s => s.Id == 10);
+                Assert.Null(oldUser);
+                Assert.NotNull(newUser);
+            };
+
+        }
+        [Fact]
+        public void Check_userEnity_is_Price_updated_correctly()
+        {
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                UserRepository repo = new UserRepository(context);
+                var user = repo.GetById(1);
+                var oldValue = user.AvailableAmount;
+                user.AvailableAmount = 20000;
+                repo.Update(user);
+                repo.Save();
+                Assert.Equal(1000, oldValue);
+                Assert.Equal(20000, user.AvailableAmount);
+            };
+
+        }
+        [Fact]
+        public void Check_userEnity_is_quantity_updated_correctly()
+        {
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                UserRepository repo = new UserRepository(context);
+                var user = repo.GetById(1);
+                var oldValue = user.Firstname;
+                user.Firstname = "Test_raj";
+                repo.Update(user);
+                repo.Save();
+                Assert.Equal("raj", oldValue);
+                Assert.Equal("Test_raj", user.Firstname);
+            };
+
+        }
+        [Fact]
+        public void Check_stockenity_is_added_correctly()
+        {
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                var stock = new Stock() { Id = 10, Price = 10, Quantity = 100 };
+                GenericRepository<Stock> repo = new GenericRepository<Stock>(context);
+                var oldStock = context.Stock.FirstOrDefault(s => s.Id == 10);
+                repo.Insert(stock);
+                repo.Save();
+                var newStock = context.Stock.FirstOrDefault(s => s.Id == 10);
+                Assert.Null(oldStock);
+                Assert.NotNull(newStock);
+            };
+
+        }
+        [Fact]
+        public void Check_holdshareenity_fetched_correctly()
+        {
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                GenericRepository<HoldingShare> repo = new GenericRepository<HoldingShare>(context);
+                var user = repo.GetById(1);
+                Assert.Equal(15, user.Price);
+                Assert.Equal(1000, user.Quantity);
+            };
+
+        }
+        [Fact]
+        public void Check_holdshare_all_enity_fetched_correctly()
+        {
+            using (var context = new eTraderDBContext(this.fixture.option))
+            {
+                GenericRepository<HoldingShare> repo = new GenericRepository<HoldingShare>(context);
+                var user = repo.GetAll();
+                Assert.Single(user.ToList());
+            };
         }
     }
 }

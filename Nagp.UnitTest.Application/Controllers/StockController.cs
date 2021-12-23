@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Nagp.UnitTest.Application.Common;
 using Nagp.UnitTest.Application.Model;
+using Nagp.UnitTest.Business.Exceptions;
 using Nagp.UnitTest.Business.Interface;
 using Nagp.UnitTest.Business.Model;
 using System;
@@ -57,6 +58,11 @@ namespace Nagp.UnitTest.Application.Controllers
                 }
 
             }
+            catch (BusinessException ex)
+            {
+                response.Status = Constants.UnSuccessful;
+                response.ErrorMessage = ex.Message;
+            }
             catch (Exception ex)
             {
                 response.Status = Constants.UnSuccessful;
@@ -84,6 +90,11 @@ namespace Nagp.UnitTest.Application.Controllers
                     response.Status = Constants.Successful;
                 }
 
+            }
+            catch (BusinessException ex)
+            {
+                response.Status = Constants.UnSuccessful;
+                response.ErrorMessage = ex.Message;
             }
             catch (Exception ex)
             {
