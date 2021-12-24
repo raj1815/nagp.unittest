@@ -224,35 +224,33 @@ var assemblies = [
   {
     "name": "Nagp.UnitTest.Application",
     "classes": [
-      { "name": "Nagp.UnitTest.Application.Controllers.StockController", "rp": "Nagp.UnitTest.Application_StockController.html", "cl": 47, "ucl": 0, "cal": 47, "tl": 98, "ct": "LineCoverage", "mc": "-", "cb": 4, "tb": 4, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Application.Controllers.UserController", "rp": "Nagp.UnitTest.Application_UserController.html", "cl": 26, "ucl": 0, "cal": 26, "tl": 68, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Application.Mapper.MappingProfile", "rp": "Nagp.UnitTest.Application_MappingProfile.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 18, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Application.Controllers.StockController", "rp": "Nagp.UnitTest.Application_StockController.html", "cl": 57, "ucl": 0, "cal": 57, "tl": 109, "ct": "LineCoverage", "mc": "-", "cb": 4, "tb": 4, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Application.Controllers.UserController", "rp": "Nagp.UnitTest.Application_UserController.html", "cl": 31, "ucl": 0, "cal": 31, "tl": 74, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Application.Mapper.MappingProfile", "rp": "Nagp.UnitTest.Application_MappingProfile.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 19, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Application.Model.BaseResponseDto", "rp": "Nagp.UnitTest.Application_BaseResponseDto.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 14, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Application.Model.FundRequestDto", "rp": "Nagp.UnitTest.Application_FundRequestDto.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 14, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Application.Model.StockRequestDto", "rp": "Nagp.UnitTest.Application_StockRequestDto.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 23, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Application.Program", "rp": "Nagp.UnitTest.Application_Program.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 26, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Application.Startup", "rp": "Nagp.UnitTest.Application_Startup.html", "cl": 0, "ucl": 29, "cal": 29, "tl": 71, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 2, "lch": [], "bch": [], "hc": [] },
     ]},
   {
     "name": "Nagp.UnitTest.Business",
     "classes": [
       { "name": "Nagp.UnitTest.Business.Common.Helper", "rp": "Nagp.UnitTest.Business_Helper.html", "cl": 0, "ucl": 7, "cal": 7, "tl": 18, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 6, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Business.Common.Wrapper", "rp": "Nagp.UnitTest.Business_Wrapper.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 14, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Business.Exceptions.BusinessException", "rp": "Nagp.UnitTest.Business_BusinessException.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 15, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Business.Exceptions.BusinessException", "rp": "Nagp.UnitTest.Business_BusinessException.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 15, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Business.Model.FundRequest", "rp": "Nagp.UnitTest.Business_FundRequest.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 13, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Business.Model.StockRequest", "rp": "Nagp.UnitTest.Business_StockRequest.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 15, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Business.StockManager", "rp": "Nagp.UnitTest.Business_StockManager.html", "cl": 0, "ucl": 86, "cal": 86, "tl": 138, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 26, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Business.UserManager", "rp": "Nagp.UnitTest.Business_UserManager.html", "cl": 0, "ucl": 22, "cal": 22, "tl": 46, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 12, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Business.StockManager", "rp": "Nagp.UnitTest.Business_StockManager.html", "cl": 0, "ucl": 90, "cal": 90, "tl": 145, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 28, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Business.UserManager", "rp": "Nagp.UnitTest.Business_UserManager.html", "cl": 0, "ucl": 23, "cal": 23, "tl": 47, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 4, "lch": [], "bch": [], "hc": [] },
     ]},
   {
     "name": "Nagp.UnitTest.EntityFrameworkCore",
     "classes": [
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.eTraderDBContext", "rp": "Nagp.UnitTest.EntityFrameworkCore_eTraderDBContext.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 23, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.HoldingShare", "rp": "Nagp.UnitTest.EntityFrameworkCore_HoldingShare.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 19, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.eTraderDBContext", "rp": "Nagp.UnitTest.EntityFrameworkCore_eTraderDBContext.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 22, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.HoldingShare", "rp": "Nagp.UnitTest.EntityFrameworkCore_HoldingShare.html", "cl": 0, "ucl": 6, "cal": 6, "tl": 26, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.Stock", "rp": "Nagp.UnitTest.EntityFrameworkCore_Stock.html", "cl": 0, "ucl": 3, "cal": 3, "tl": 17, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.User", "rp": "Nagp.UnitTest.EntityFrameworkCore_User.html", "cl": 0, "ucl": 4, "cal": 4, "tl": 19, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.GenericRepository<T>", "rp": "Nagp.UnitTest.EntityFrameworkCore_GenericRepository_1.html", "cl": 0, "ucl": 23, "cal": 23, "tl": 41, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.UserRepository", "rp": "Nagp.UnitTest.EntityFrameworkCore_UserRepository.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 24, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.UserRepository", "rp": "Nagp.UnitTest.EntityFrameworkCore_UserRepository.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 26, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 2, "lch": [], "bch": [], "hc": [] },
     ]},
 ];
 

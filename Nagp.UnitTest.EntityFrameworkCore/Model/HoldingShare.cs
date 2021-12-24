@@ -18,9 +18,5 @@ namespace Nagp.UnitTest.EntityFrameworkCore.Model
 
         public int UserId { get; set; }
 
-        public virtual User user
-        {
-            get; set;
-        }
     }
 }

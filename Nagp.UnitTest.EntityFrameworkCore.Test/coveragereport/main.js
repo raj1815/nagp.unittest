@@ -224,12 +224,12 @@ var assemblies = [
   {
     "name": "Nagp.UnitTest.EntityFrameworkCore",
     "classes": [
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.eTraderDBContext", "rp": "Nagp.UnitTest.EntityFrameworkCore_eTraderDBContext.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 23, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.HoldingShare", "rp": "Nagp.UnitTest.EntityFrameworkCore_HoldingShare.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 19, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.eTraderDBContext", "rp": "Nagp.UnitTest.EntityFrameworkCore_eTraderDBContext.html", "cl": 5, "ucl": 0, "cal": 5, "tl": 22, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.HoldingShare", "rp": "Nagp.UnitTest.EntityFrameworkCore_HoldingShare.html", "cl": 4, "ucl": 2, "cal": 6, "tl": 26, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.Stock", "rp": "Nagp.UnitTest.EntityFrameworkCore_Stock.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 17, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.User", "rp": "Nagp.UnitTest.EntityFrameworkCore_User.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 19, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.GenericRepository<T>", "rp": "Nagp.UnitTest.EntityFrameworkCore_GenericRepository_1.html", "cl": 23, "ucl": 0, "cal": 23, "tl": 41, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.UserRepository", "rp": "Nagp.UnitTest.EntityFrameworkCore_UserRepository.html", "cl": 9, "ucl": 0, "cal": 9, "tl": 24, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.UserRepository", "rp": "Nagp.UnitTest.EntityFrameworkCore_UserRepository.html", "cl": 11, "ucl": 0, "cal": 11, "tl": 26, "ct": "LineCoverage", "mc": "-", "cb": 2, "tb": 2, "lch": [], "bch": [], "hc": [] },
     ]},
 ];
 

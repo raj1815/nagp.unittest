@@ -229,19 +229,18 @@ var assemblies = [
       { "name": "Nagp.UnitTest.Business.Exceptions.BusinessException", "rp": "Nagp.UnitTest.Business_BusinessException.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 15, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Business.Model.FundRequest", "rp": "Nagp.UnitTest.Business_FundRequest.html", "cl": 2, "ucl": 0, "cal": 2, "tl": 13, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.Business.Model.StockRequest", "rp": "Nagp.UnitTest.Business_StockRequest.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 15, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Business.StockManager", "rp": "Nagp.UnitTest.Business_StockManager.html", "cl": 86, "ucl": 0, "cal": 86, "tl": 138, "ct": "LineCoverage", "mc": "-", "cb": 26, "tb": 26, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.Business.UserManager", "rp": "Nagp.UnitTest.Business_UserManager.html", "cl": 22, "ucl": 0, "cal": 22, "tl": 46, "ct": "LineCoverage", "mc": "-", "cb": 12, "tb": 12, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Business.StockManager", "rp": "Nagp.UnitTest.Business_StockManager.html", "cl": 90, "ucl": 0, "cal": 90, "tl": 145, "ct": "LineCoverage", "mc": "-", "cb": 28, "tb": 28, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.Business.UserManager", "rp": "Nagp.UnitTest.Business_UserManager.html", "cl": 23, "ucl": 0, "cal": 23, "tl": 47, "ct": "LineCoverage", "mc": "-", "cb": 4, "tb": 4, "lch": [], "bch": [], "hc": [] },
     ]},
   {
     "name": "Nagp.UnitTest.EntityFrameworkCore",
     "classes": [
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.ConnectionFactory", "rp": "Nagp.UnitTest.EntityFrameworkCore_ConnectionFactory.html", "cl": 0, "ucl": 35, "cal": 35, "tl": 66, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 8, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.eTraderDBContext", "rp": "Nagp.UnitTest.EntityFrameworkCore_eTraderDBContext.html", "cl": 0, "ucl": 8, "cal": 8, "tl": 27, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.HoldingShare", "rp": "Nagp.UnitTest.EntityFrameworkCore_HoldingShare.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 19, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.eTraderDBContext", "rp": "Nagp.UnitTest.EntityFrameworkCore_eTraderDBContext.html", "cl": 0, "ucl": 5, "cal": 5, "tl": 22, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.HoldingShare", "rp": "Nagp.UnitTest.EntityFrameworkCore_HoldingShare.html", "cl": 4, "ucl": 2, "cal": 6, "tl": 26, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.Stock", "rp": "Nagp.UnitTest.EntityFrameworkCore_Stock.html", "cl": 3, "ucl": 0, "cal": 3, "tl": 17, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Nagp.UnitTest.EntityFrameworkCore.Model.User", "rp": "Nagp.UnitTest.EntityFrameworkCore_User.html", "cl": 4, "ucl": 0, "cal": 4, "tl": 19, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.GenericRepository<T>", "rp": "Nagp.UnitTest.EntityFrameworkCore_GenericRepository_1.html", "cl": 0, "ucl": 32, "cal": 32, "tl": 50, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.UserRepository", "rp": "Nagp.UnitTest.EntityFrameworkCore_UserRepository.html", "cl": 0, "ucl": 9, "cal": 9, "tl": 24, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.GenericRepository<T>", "rp": "Nagp.UnitTest.EntityFrameworkCore_GenericRepository_1.html", "cl": 0, "ucl": 23, "cal": 23, "tl": 41, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Nagp.UnitTest.EntityFrameworkCore.Repository.UserRepository", "rp": "Nagp.UnitTest.EntityFrameworkCore_UserRepository.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 26, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 2, "lch": [], "bch": [], "hc": [] },
     ]},
 ];
 

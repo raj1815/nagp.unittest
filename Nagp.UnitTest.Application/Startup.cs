@@ -16,11 +16,13 @@ using Nagp.UnitTest.EntityFrameworkCore.Model;
 using Nagp.UnitTest.EntityFrameworkCore.Repository;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Nagp.UnitTest.Application
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
