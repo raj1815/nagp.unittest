@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using Nagp.UnitTest.Business.Common;
 using Nagp.UnitTest.Business.Exceptions;
+using Nagp.UnitTest.EntityFrameworkCore;
 
 namespace Nagp.UnitTest.Business
 {
@@ -47,9 +48,10 @@ namespace Nagp.UnitTest.Business
                     throw new BusinessException("Insufficient funds");
                 }
 
-                user.AvailableAmount = user.AvailableAmount - (stock.Price * stockRequest.Quantity);
+                
 
-                var stockExist = user.HoldingShares?.FirstOrDefault(s => s.ShareId == stockRequest.StockId);
+                var stockExist = user.HoldingShares?.FirstOrDefault(s => s.StockId == stockRequest.StockId);
+               // response = user;
                 if (stockExist != null)
                 {
                     stockExist.Quantity += stockRequest.Quantity;
@@ -60,20 +62,20 @@ namespace Nagp.UnitTest.Business
                 {
                     HoldingShare newStock = new HoldingShare()
                     {
-                        ShareId = stock.Id,
+                        StockId = stock.Id,
                         Price = stock.Price,
                         Quantity = stockRequest.Quantity,
                         UserId = stockRequest.UserID
                     };
 
                     this._holdingShare.Insert(newStock);
-
-                    if(user.HoldingShares == null)
+                    if (user.HoldingShares == null)
                     {
                         user.HoldingShares = new List<HoldingShare>();
                     }
                     user.HoldingShares.Add(newStock);
                 }
+                user.AvailableAmount = user.AvailableAmount - (stock.Price * stockRequest.Quantity);
                 this._users.Update(user);
                 this._users.Save();
                 response = user;
@@ -99,7 +101,7 @@ namespace Nagp.UnitTest.Business
                     throw new BusinessException("Stock doesnot exist");
                 }
 
-                var stockExist = response.HoldingShares.FirstOrDefault(s => s.ShareId == stockRequest.StockId);
+                var stockExist = response.HoldingShares.FirstOrDefault(s => s.StockId == stockRequest.StockId);
 
                 if (stockExist == null)
                 {

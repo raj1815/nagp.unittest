@@ -14,6 +14,6 @@ namespace Nagp.UnitTest.EntityFrameworkCore.Model
 
         public double AvailableAmount { get; set; }
 
-        public List<HoldingShare> HoldingShares { get; set; }
+        public virtual List<HoldingShare> HoldingShares { get; set; }
     }
 }

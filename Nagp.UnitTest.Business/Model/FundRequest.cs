@@ -6,7 +6,7 @@ namespace Nagp.UnitTest.Business.Model
 {
     public class FundRequest
     {
-        public dynamic Amount { get; set; }
+        public double Amount { get; set; }
 
         public int UserID { get; set; }
     }

@@ -40,7 +40,8 @@ namespace Nagp.UnitTest.Business.Test
                     User.Object,
                     Stock.Object,
                     HoldingShare.Object,
-                    Wrapper.Object);
+                    Wrapper.Object
+                    );
 
             return _stockManager;
         }
@@ -187,7 +188,7 @@ namespace Nagp.UnitTest.Business.Test
             .Returns(new User()
             {
                 Id = 5,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 5 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 20, Quantity = 5 } }
             });
 
             setup.Wrapper.Setup((c) => c.isTradingTime())
@@ -224,7 +225,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 5,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 2, Quantity = 5 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 2, Quantity = 5 } }
             });
 
             setup.Wrapper.Setup((c) => c.isTradingTime())
@@ -264,7 +265,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 10,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 20 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 20, Quantity = 20 } }
             }); 
 
             var manager =
@@ -277,7 +278,7 @@ namespace Nagp.UnitTest.Business.Test
             //Act
 
             var response = manager.Sell(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.StockId == stockRequest.StockId).FirstOrDefault();
 
             Assert.Equal(40, response.AvailableAmount);
             Assert.Equal(15, holdShare.Quantity);
@@ -301,7 +302,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 10000,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 20, Quantity = 2000 } }
             });
 
             var manager =
@@ -315,7 +316,7 @@ namespace Nagp.UnitTest.Business.Test
             //Act
 
             var response = manager.Sell(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.StockId == stockRequest.StockId).FirstOrDefault();
 
             Assert.Equal(19980, response.AvailableAmount);
             Assert.Equal(1000, holdShare.Quantity);
@@ -339,7 +340,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 10000,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 20, Quantity = 2000 } }
             });
 
             setup.User.Setup((c) => c.Update(It.IsAny<User>()))
@@ -379,7 +380,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 10000,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 20, Quantity = 2000 } }
             });
 
             setup.Stock.Setup((c) => c.Update(It.IsAny<Stock>()))
@@ -419,7 +420,7 @@ namespace Nagp.UnitTest.Business.Test
             {
                 Id = 5,
                 AvailableAmount = 10000,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 2000 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 20, Quantity = 2000 } }
             });
 
             setup.User.Setup((c) => c.Save())
@@ -558,8 +559,8 @@ namespace Nagp.UnitTest.Business.Test
 
             //Act
             var response = manager.Buy(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
-            var holdShareNotPresent = response.HoldingShares.Where(h => h.ShareId == 100).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.StockId == stockRequest.StockId).FirstOrDefault();
+            var holdShareNotPresent = response.HoldingShares.Where(h => h.StockId == 100).FirstOrDefault();
 
             Assert.NotNull(holdShare);
             Assert.Null(holdShareNotPresent);
@@ -581,7 +582,7 @@ namespace Nagp.UnitTest.Business.Test
                 Id = 2,
                 Firstname = "test",
                 AvailableAmount = availableAmount,
-                HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 1, Quantity = 5, Price = 100 } }
+                HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 1, Quantity = 5, Price = 100 } }
             });
 
             setup.Wrapper.Setup((c) => c.isTradingTime())
@@ -597,7 +598,7 @@ namespace Nagp.UnitTest.Business.Test
 
             //Act
             var response = manager.Buy(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.StockId == stockRequest.StockId).FirstOrDefault();
         
             Assert.NotNull(holdShare);
             Assert.Equal(2, response.HoldingShares.Count);
@@ -619,7 +620,7 @@ namespace Nagp.UnitTest.Business.Test
 
             setup.User.Setup((c) => c.GetById(It.IsAny<int>()))
             .Returns(new User() { Id = 2, Firstname = "test", AvailableAmount = availableAmount,
-            HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 1, Quantity = 5, Price= 100} }
+            HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 1, Quantity = 5, Price= 100} }
             }); 
 
             var manager =
@@ -632,7 +633,7 @@ namespace Nagp.UnitTest.Business.Test
           
             //Act
             var response = manager.Buy(stockRequest);
-            var holdShare = response.HoldingShares.Where(h => h.ShareId == stockRequest.StockId).FirstOrDefault();            var holdShareNotPresent = response.HoldingShares.Where(h => h.ShareId == 100).FirstOrDefault();
+            var holdShare = response.HoldingShares.Where(h => h.StockId == stockRequest.StockId).FirstOrDefault();            var holdShareNotPresent = response.HoldingShares.Where(h => h.StockId == 100).FirstOrDefault();
 
             Assert.NotNull(holdShare);
             Assert.Equal(10, holdShare.Quantity);
@@ -686,7 +687,7 @@ namespace Nagp.UnitTest.Business.Test
              .Returns(new User()
              {
                  Id = 5,
-                 HoldingShares = new List<HoldingShare>() { new HoldingShare() { ShareId = 10, Price = 20, Quantity = 5 } }
+                 HoldingShares = new List<HoldingShare>() { new HoldingShare() { StockId = 10, Price = 20, Quantity = 5 } }
              });
 
             setup.HoldingShare.Setup((c) => c.Update(It.IsAny<HoldingShare>()))

@@ -7,7 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Nagp.UnitTest.Business;
+using Nagp.UnitTest.Business.Common;
 using Nagp.UnitTest.Business.Interface;
 using Nagp.UnitTest.EntityFrameworkCore;
 using Nagp.UnitTest.EntityFrameworkCore.Model;
@@ -36,16 +38,23 @@ namespace Nagp.UnitTest.Application
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IStockManager, StockManager>();
+            services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IRepository<User>, GenericRepository<User>>();
             services.AddScoped<IRepository<Stock>, GenericRepository<Stock>>();
             services.AddScoped<IRepository<HoldingShare>, GenericRepository<HoldingShare>>();
             services.AddScoped<IUserRepository, UserRepository>();
-
+            services.AddScoped<IWrapper, Wrapper>();
+      
             //services.AddDbContext<eTraderDBContext>(opt => opt.UseInMemoryDatabase(databaseName: "eTraderDB"));
             //services.AddScoped<eTraderDBContext>();
             // Add framework services.
             services.AddDbContext<eTraderDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Trade", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +63,9 @@ namespace Nagp.UnitTest.Application
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product.API v1"));
+
             }
 
             app.UseHttpsRedirection();

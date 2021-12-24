@@ -18,6 +18,5 @@ namespace Nagp.UnitTest.EntityFrameworkCore
         public virtual DbSet<Stock> Stock { get; set; }
 
         public virtual DbSet<HoldingShare> HoldingShare{ get; set; }
-
     }
 }

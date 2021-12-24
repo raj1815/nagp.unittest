@@ -16,8 +16,10 @@ namespace Nagp.UnitTest.EntityFrameworkCore.Repository
         public User GetById(int id)
         {
             var record = base.GetById(id);
-            var holdingShare = base._context.HoldingShare.Where(h => h.UserId == id).ToList();
-            record.HoldingShares = holdingShare;
+            if(record != null)
+            {
+                record.HoldingShares = base._context.HoldingShare.Where(h => h.UserId == id).ToList();
+            }
             return record;
         }
     }

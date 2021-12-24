@@ -51,7 +51,7 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
                 });
                 context.HoldingShare.Add(new HoldingShare()
                 {
-                    ShareId = 2,
+                    StockId = 2,
                     Price = 15,
                     Quantity = 1000,
                     UserId = 1
@@ -73,6 +73,7 @@ namespace Nagp.UnitTest.EntityFrameworkCoreTest
         public RepositoryUnitTest(DatabaseFixture fixture)
         {
             this.fixture = fixture;
+           // context.Database.EnsureDeleted();
         }
 
         [Fact]

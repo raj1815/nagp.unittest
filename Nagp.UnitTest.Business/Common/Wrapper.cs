@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Nagp.UnitTest.Business.Common
 {
-    class Wrapper : IWrapper
+    public class Wrapper : IWrapper
     {
         public bool isTradingTime()
         {

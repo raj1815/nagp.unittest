@@ -13,6 +13,7 @@ namespace Nagp.UnitTest.Application.Mapper
         public MappingProfile()
         {
             CreateMap<StockRequestDto, StockRequest>();
+            CreateMap<FundRequestDto, FundRequest>();
         }
     }
 }
